@@ -30,21 +30,46 @@ class Graph:
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        if self.vertices[vertex_id] == set():
+            return None
+        return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Create an empty Queue and enqueue the starting vertex ID
+        q = Queue()
+        q.enqueue(starting_vertex)
+        # Create an empty Set to store visited vertices
+        visited = set()
+        # While the Queue is not empty...
+        while q.size() > 0:
+            # Dequeue the first vertex
+            v = q.dequeue()
+            # If that vertex has not been visited...
+            if v not in visited:
+                # Mark it as visited
+                print(v)
+                visited.add(v)
+                # Then add all of its neighbors to the back of the Queue
+                for neighbor in self.get_neighbors(v):
+                    q.enqueue(neighbor)
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Create an empty Stack and push the starting vertex ID
+        # Create an empty Set to store visited vertices
+        # While the Stack is not empty...
+        # Pop the first vertex
+        # If that vertex has not been visited...
+        # Mark it as visited
+        # Then add all of its neighbors to the top of the Stack
+        pass
 
     def dft_recursive(self, starting_vertex):
         """
@@ -124,7 +149,7 @@ if __name__ == '__main__':
         1, 2, 4, 3, 7, 6, 5
         1, 2, 4, 3, 7, 5, 6
     '''
-    # graph.bft(1)
+    graph.bft(1)
 
     '''
     Valid DFT paths:
