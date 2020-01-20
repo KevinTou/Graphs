@@ -63,12 +63,22 @@ class Graph:
         beginning from starting_vertex.
         """
         # Create an empty Stack and push the starting vertex ID
+        s = Stack()
+        s.push(starting_vertex)
         # Create an empty Set to store visited vertices
+        visited = set()
         # While the Stack is not empty...
-        # Pop the first vertex
-        # If that vertex has not been visited...
-        # Mark it as visited
-        # Then add all of its neighbors to the top of the Stack
+        while s.size() > 0:
+            # Pop the first vertex
+            v = s.pop()
+            # If that vertex has not been visited...
+            if v not in visited:
+                # Mark it as visited
+                print(v)
+                visited.add(v)
+                # Then add all of its neighbors to the top of the Stack
+                for neighbor in self.get_neighbors(v):
+                    s.push(neighbor)
         pass
 
     def dft_recursive(self, starting_vertex):
@@ -158,7 +168,7 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    # graph.dft(1)
+    graph.dft(1)
     # graph.dft_recursive(1)
 
     '''
