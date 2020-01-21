@@ -88,7 +88,24 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+        # Create Set to hold visited vertices
+        visited = set()
+
+        # Helper function called recursively
+        def inner_dft(vertex):
+            # Check to see if the vertex is in the visited Set
+            # If not, mark the vertex as visited and print
+            if vertex not in visited:
+                visited.add(vertex)
+                print(vertex)
+                # Call on the vertex's neighbors
+                for neigbor in self.get_neighbors(vertex):
+                    inner_dft(neigbor)
+            # Otherwise, return
+            else:
+                return
+        # Begin the recursive call using the starting vertex
+        inner_dft(starting_vertex)
 
     def bfs(self, starting_vertex, destination_vertex):
         """
@@ -219,7 +236,7 @@ if __name__ == '__main__':
         1, 2, 4, 6, 3, 5, 7
     '''
     # graph.dft(1)
-    # graph.dft_recursive(1)
+    graph.dft_recursive(1)
 
     '''
     Valid BFS path:
@@ -232,5 +249,5 @@ if __name__ == '__main__':
         [1, 2, 4, 6]
         [1, 2, 4, 7, 6]
     '''
-    print(graph.dfs(1, 6))
+    # print(graph.dfs(1, 6))
     # print(graph.dfs_recursive(1, 6))
