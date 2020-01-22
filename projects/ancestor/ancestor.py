@@ -19,20 +19,26 @@ def earliest_ancestor(ancestors, starting_node):
 
     # Add starting node to stack
     stack.push(starting_node)
+
+    # Initialize ancestor value with -1 (or false)
     ancestor = -1
 
+    # Go through the stack
     while stack.size() > 0:
         current = stack.pop()
+        # Go through the list of vertices and add all the parents that the current is a child of
         for vertex in graph.vertices:
             if current in graph.get_neighbors(vertex) and current not in visited:
                 visited.add(current)
                 stack.push(vertex)
 
+        # Update ancestor based on whether or not current changed (has a parent)
         if current == starting_node:
             ancestor = -1
         else:
             ancestor = current
 
+    # Return the earliest ancestor (if there was one)
     return ancestor
 
 # start: 1
