@@ -1,4 +1,5 @@
 import random
+from queue import Queue
 
 
 class User:
@@ -82,6 +83,28 @@ class SocialGraph:
         """
         visited = {}  # Note that this is a dictionary, not a set
         # !!!! IMPLEMENT ME
+
+        # Create a Queue
+        q = Queue()
+        # Put the starting point in the Queue
+        q.enqueue([user_id])
+        # While there items in the Queue
+        while q.size() > 0:
+            # Pop the first item
+            path = q.dequeue()
+            user = path[-1]
+            # If not visited
+            if user not in visited:
+                visited[user] = path
+                # For each edge in the item
+                for friend_id in self.friendships[user]:
+                    # Copy path to avoid pass by reference bug
+                    # Make a copy of path rather than reference
+                    if friend_id not in visited:
+                        new_path = list(path)
+                        new_path.append(friend_id)
+                        q.enqueue(new_path)
+
         return visited
 
 
@@ -89,5 +112,5 @@ if __name__ == '__main__':
     sg = SocialGraph()
     sg.populate_graph(10, 2)
     print(sg.friendships)
-    # connections = sg.get_all_social_paths(1)
-    # print(connections)
+    connections = sg.get_all_social_paths(1)
+    print(connections)
